@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>2026-07-30 매매 복기 리포트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+  .summary {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .stat { min-width: 120px; }
+  .stat .label { font-size: 12px; color: var(--text-muted); }
+  .stat .value { font-size: 20px; font-weight: 600; }
+  .analysis {
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .good { color: #006300; font-weight: 600; }
+  .bad { color: #b3261e; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  table.trades {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden;
+  }
+  table.trades th, table.trades td {
+    text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    font-variant-numeric: tabular-nums;
+  }
+  table.trades th:nth-child(1), table.trades td:nth-child(1),
+  table.trades th:nth-child(2), table.trades td:nth-child(2),
+  table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
+  table.trades th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  .code { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .tag-carry { background: #fdeeda; color: #93540a; }
+  h2.section { font-size: 16px; margin: 28px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .card-head h3 { font-size: 15px; margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .sigbox { background: var(--page); border: 1px solid var(--grid); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .sigbox ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .sig-yes { color: #006300; font-weight: 600; font-size: 12px; }
+  .sig-no { color: var(--text-muted); font-size: 12px; }
+  table.mas { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mas td { padding: 3px 4px; border-bottom: 1px solid var(--grid); }
+  table.mas td:first-child { color: var(--text-muted); }
+  table.mas td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2026-07-30 매매 복기 리포트</h1>
+  <div class="subtitle">모의투자 · 시각은 KST 기준 · 자동생성</div>
+  <div class="summary">
+    <div class="stat"><div class="label">체결 완료</div><div class="value">24건</div></div>
+    <div class="stat"><div class="label">승/패</div><div class="value">6승 18패</div></div>
+    <div class="stat"><div class="label">평균 수익률</div><div class="value bad">-0.21%</div></div>
+  </div>
+  <div class='analysis'><h2>분석</h2><ul><li>워치리스트가 20260723 기준으로 7일째 미갱신 상태.</li></ul></div>
+  <h2 class="section">전체 체결 내역</h2>
+  <table class="trades">
+    <thead><tr><th>진입(KST)</th><th>종목</th><th>체제</th><th>진입가</th><th>청산가</th><th>수익률</th><th>청산(KST)</th></tr></thead>
+    <tbody><tr><td>09:13</td><td>하나금융지주<span class='code'> 086790</span></td><td>A</td><td>124,300</td><td>128,100</td><td><span class='good'>+3.06%</span></td><td>11:30</td></tr><tr><td>09:28</td><td>에코프로<span class='code'> 086520</span></td><td>A</td><td>71,600</td><td>70,900</td><td><span class='bad'>-0.98%</span></td><td>09:40</td></tr><tr><td>09:28</td><td>알테오젠<span class='code'> 196170</span></td><td>A</td><td>290,500</td><td>284,500</td><td><span class='bad'>-2.07%</span></td><td>09:40</td></tr><tr><td>09:28</td><td>우리금융지주<span class='code'> 316140</span></td><td>A</td><td>33,300</td><td>33,300</td><td><span class='muted'>0.00%</span></td><td>11:25</td></tr><tr><td>09:28</td><td>한국항공우주<span class='code'> 047810</span></td><td>A</td><td>123,300</td><td>123,403</td><td><span class='good'>+0.08%</span></td><td>11:15</td></tr><tr><td>09:42</td><td>HMM<span class='code'> 011200</span></td><td>A</td><td>20,950</td><td>20,950</td><td><span class='muted'>0.00%</span></td><td>11:45</td></tr><tr><td>09:42</td><td>HD현대일렉트릭<span class='code'> 267260</span></td><td>A</td><td>592,000</td><td>609,000</td><td><span class='good'>+2.87%</span></td><td>11:25</td></tr><tr><td>11:17</td><td>현대모비스<span class='code'> 012330</span></td><td>A</td><td>457,500</td><td>455,000</td><td><span class='bad'>-0.55%</span></td><td>11:25</td></tr><tr><td>11:27</td><td>두산에너빌리티<span class='code'> 034020</span></td><td>A</td><td>61,800</td><td>61,300</td><td><span class='bad'>-0.81%</span></td><td>11:35</td></tr><tr><td>11:27</td><td>한미반도체<span class='code'> 042700</span></td><td>A</td><td>168,100</td><td>167,000</td><td><span class='bad'>-0.65%</span></td><td>11:35</td></tr><tr><td>11:27</td><td>SK텔레콤<span class='code'> 017670</span></td><td>A</td><td>80,200</td><td>79,800</td><td><span class='bad'>-0.50%</span></td><td>11:35</td></tr><tr><td>11:32</td><td>현대차<span class='code'> 005380</span></td><td>A</td><td>356,500</td><td>354,500</td><td><span class='bad'>-0.56%</span></td><td>11:40</td></tr><tr><td>11:37</td><td>삼성전자<span class='code'> 005930</span></td><td>A</td><td>215,750</td><td>217,000</td><td><span class='good'>+0.58%</span></td><td>11:45</td></tr><tr><td>11:37</td><td>SK<span class='code'> 034730</span></td><td>A</td><td>485,000</td><td>489,000</td><td><span class='good'>+0.82%</span></td><td>11:45</td></tr><tr><td>11:37</td><td>LG이노텍<span class='code'> 011070</span></td><td>A</td><td>439,500</td><td>440,500</td><td><span class='good'>+0.23%</span></td><td>11:45</td></tr><tr><td>11:41</td><td>에이피알<span class='code'> 278470</span></td><td>A</td><td>320,500</td><td>320,500</td><td><span class='muted'>0.00%</span></td><td>11:50</td></tr><tr><td>11:46</td><td>SK하이닉스<span class='code'> 000660</span></td><td>A</td><td>1,367,000</td><td>1,364,000</td><td><span class='bad'>-0.22%</span></td><td>11:55</td></tr><tr><td>11:46</td><td>NAVER<span class='code'> 035420</span></td><td>A</td><td>198,800</td><td>198,400</td><td><span class='bad'>-0.20%</span></td><td>12:05</td></tr><tr><td>11:46</td><td>LG전자<span class='code'> 066570</span></td><td>A</td><td>148,800</td><td>148,600</td><td><span class='bad'>-0.13%</span></td><td>11:55</td></tr><tr><td>11:51</td><td>POSCO홀딩스<span class='code'> 005490</span></td><td>A</td><td>298,500</td><td>295,500</td><td><span class='bad'>-1.01%</span></td><td>12:00</td></tr><tr><td>11:51</td><td>삼성물산<span class='code'> 028260</span></td><td>A</td><td>305,000</td><td>300,000</td><td><span class='bad'>-1.64%</span></td><td>12:00</td></tr><tr><td>11:56</td><td>한화에어로스페이스<span class='code'> 012450</span></td><td>A</td><td>905,000</td><td>892,000</td><td><span class='bad'>-1.44%</span></td><td>12:05</td></tr><tr><td>11:56</td><td>삼성전기<span class='code'> 009150</span></td><td>A</td><td>1,007,000</td><td>990,000</td><td><span class='bad'>-1.69%</span></td><td>12:05</td></tr><tr><td>12:01</td><td>삼성중공업<span class='code'> 010140</span></td><td>A</td><td>20,750</td><td>20,700</td><td><span class='bad'>-0.24%</span></td><td>12:10</td></tr></tbody>
+  </table>
+  <h2 class="section">종목별 매수 근거 신호 breakdown</h2>
+  <div class="grid"></div>
+</div>
+</body>
+</html>
