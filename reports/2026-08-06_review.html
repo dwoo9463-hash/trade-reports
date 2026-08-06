@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>2026-08-06 매매 복기 리포트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+  .summary {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .stat { min-width: 120px; }
+  .stat .label { font-size: 12px; color: var(--text-muted); }
+  .stat .value { font-size: 20px; font-weight: 600; }
+  .analysis {
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .good { color: #006300; font-weight: 600; }
+  .bad { color: #b3261e; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .small { font-size: 12px; }
+  table.trades {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden;
+  }
+  table.trades th, table.trades td {
+    text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    font-variant-numeric: tabular-nums;
+  }
+  table.trades th:nth-child(1), table.trades td:nth-child(1),
+  table.trades th:nth-child(2), table.trades td:nth-child(2),
+  table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
+  table.trades th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  .code { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .tag-carry { background: #fdeeda; color: #93540a; }
+  h2.section { font-size: 16px; margin: 28px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .card-head h3 { font-size: 15px; margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .sigbox { background: var(--page); border: 1px solid var(--grid); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .sigbox ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .sig-yes { color: #006300; font-weight: 600; font-size: 12px; }
+  .sig-no { color: var(--text-muted); font-size: 12px; }
+  .sig-na { color: var(--text-muted); font-style: italic; font-size: 12px; }
+  table.mas { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mas td { padding: 3px 4px; border-bottom: 1px solid var(--grid); }
+  table.mas td:first-child { color: var(--text-muted); }
+  table.mas td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2026-08-06 매매 복기 리포트</h1>
+  <div class="subtitle">모의투자 · 시각은 KST 기준 · 자동생성</div>
+  <div class="summary">
+    <div class="stat"><div class="label">체결 완료</div><div class="value">8건</div></div>
+    <div class="stat"><div class="label">승/패</div><div class="value">2승 6패</div></div>
+    <div class="stat"><div class="label">평균 수익률</div><div class="value good">+0.57%</div></div>
+  </div>
+  <div class='analysis'><h2>분석</h2><ul><li>워치리스트가 20260723 기준으로 14일째 미갱신 상태.</li></ul></div>
+  <h2 class="section">전체 체결 내역</h2>
+  <table class="trades">
+    <thead><tr><th>진입(KST)</th><th>종목</th><th>체제</th><th>진입가</th><th>청산가</th><th>수익률</th><th>청산(KST)</th></tr></thead>
+    <tbody><tr><td>09:38</td><td>HD현대일렉트릭<span class='code'> 267260</span></td><td>A</td><td>770,000</td><td>756,000</td><td><span class='bad'>-1.82%</span></td><td>10:10</td></tr><tr><td>09:38</td><td>한화오션<span class='code'> 042660</span></td><td>A</td><td>90,400</td><td>89,900</td><td><span class='bad'>-0.55%</span></td><td>10:10</td></tr><tr><td>09:43</td><td>두산에너빌리티<span class='code'> 034020</span></td><td>A</td><td>76,900</td><td>74,600</td><td><span class='bad'>-2.99%</span></td><td>10:30</td></tr><tr><td>09:58</td><td>한화에어로스페이스<span class='code'> 012450</span></td><td>A</td><td>1,039,000</td><td>1,039,000</td><td><span class='muted'>0.00%</span></td><td>15:20</td></tr><tr><td>10:13</td><td>에이피알<span class='code'> 278470</span></td><td>A</td><td>366,500</td><td>379,500</td><td><span class='good'>+3.55%</span></td><td>14:35</td></tr><tr><td>10:37</td><td>우리금융지주<span class='code'> 316140</span></td><td>A</td><td>33,600</td><td>33,600</td><td><span class='muted'>0.00%</span></td><td>15:20</td></tr><tr><td>10:52</td><td>한국항공우주<span class='code'> 047810</span></td><td>A</td><td>146,700</td><td>146,700</td><td><span class='muted'>0.00%</span></td><td>15:20</td></tr><tr><td>11:17</td><td>알테오젠<span class='code'> 196170</span></td><td>A</td><td>278,500</td><td>296,244</td><td><span class='good'>+6.37%</span></td><td>14:55</td></tr></tbody>
+  </table>
+  <h2 class="section">종목별 매수 근거 신호 breakdown</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-head"><h3>HD현대일렉트릭 <span class="code">267260</span></h3>
+      <span class="muted">매수 09:38 · 매도 10:10</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 5분봉 손절선/20기간선 이탈(전량매도)</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-no'>✘ 전일종가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +10점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>20</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>770,000</td></tr>
+            <tr><td>손절가</td><td>760,000</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>911,060</td></tr>
+            <tr><td>손익비</td><td>14.11배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>한화오션 <span class="code">042660</span></h3>
+      <span class="muted">매수 09:38 · 매도 10:10</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 5분봉 손절선/20기간선 이탈(전량매도)</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-no'>✘ 전일종가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: -10점</li><li class='sig-no'>✘ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-no'>✘ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +0점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>0</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>90,400</td></tr>
+            <tr><td>손절가</td><td>90,200</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>90,440</td></tr>
+            <tr><td>손익비</td><td>0.20배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>두산에너빌리티 <span class="code">034020</span></h3>
+      <span class="muted">매수 09:43 · 매도 10:30</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 5분봉 손절선/20기간선 이탈(전량매도)</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-no'>✘ 전일종가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: -3점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +5점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +5점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>17</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>76,900</td></tr>
+            <tr><td>손절가</td><td>75,800</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>79,437</td></tr>
+            <tr><td>손익비</td><td>2.31배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>한화에어로스페이스 <span class="code">012450</span></h3>
+      <span class="muted">매수 09:58 · 매도 15:20</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 장마감(15:20) 강제청산</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-yes'>✔ 전일종가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: -7점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +8점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +5점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>26</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>1,039,000</td></tr>
+            <tr><td>손절가</td><td>1,007,000</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>1,049,000</td></tr>
+            <tr><td>손익비</td><td>0.31배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>에이피알 <span class="code">278470</span></h3>
+      <span class="muted">매수 10:13 · 매도 14:35</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 5분봉 손절선/20기간선 이탈(전량매도)</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-yes'>✔ 전일종가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +2점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +5점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>27</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>366,500</td></tr>
+            <tr><td>손절가</td><td>366,000</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>378,770</td></tr>
+            <tr><td>손익비</td><td>24.54배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>우리금융지주 <span class="code">316140</span></h3>
+      <span class="muted">매수 10:37 · 매도 15:20</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 장마감(15:20) 강제청산</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-yes'>✔ 전일종가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: -7점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +7점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +7점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>27</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>33,600</td></tr>
+            <tr><td>손절가</td><td>33,450</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>34,100</td></tr>
+            <tr><td>손익비</td><td>3.33배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>한국항공우주 <span class="code">047810</span></h3>
+      <span class="muted">매수 10:52 · 매도 15:20</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 장마감(15:20) 강제청산</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-yes'>✔ 전일종가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: -2점</li><li class='sig-no'>✘ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +3점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>21</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>146,700</td></tr>
+            <tr><td>손절가</td><td>146,500</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>147,706</td></tr>
+            <tr><td>손익비</td><td>5.03배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>알테오젠 <span class="code">196170</span></h3>
+      <span class="muted">매수 11:17 · 매도 14:55</span></div>
+      <div class="muted small" style="margin:-4px 0 8px;">매도 사유: 5분봉 10기간선 이탈(50% 매도) → 5분봉 손절선/20기간선 이탈(전량매도)</div>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-yes'>✔ 전일종가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 시가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +9점</li><li class='sig-no'>✘ 섹터 수급 가중치<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +10점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>29</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>278,500</td></tr>
+            <tr><td>손절가</td><td>291,650</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>308,080</td></tr>
+            <tr><td>손익비</td><td>계산불가</td></tr>
+          </table>
+        </div>
+      </div>
+    </div></div>
+</div>
+</body>
+</html>
