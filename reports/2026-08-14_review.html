@@ -85,6 +85,23 @@
     <div class="stat"><div class="label">평균 수익률</div><div class="value bad">-0.04%</div></div>
   </div>
   <div class='analysis'><h2>분석</h2><ul><li>워치리스트가 20260723 기준으로 22일째 미갱신 상태.</li></ul></div>
+  <div class='analysis' style="border-left: 3px solid #b3261e;">
+    <h2>운영 이슈</h2>
+    <ul>
+      <li><b>15:35 스윙 청산체크 5건 전부 실패</b>(316140/012330/278470/105560/034730,
+        <code>[키움 API 에러 3] 인증에 실패했습니다 [8005:Token이 유효하지 않습니다]</code>).</li>
+      <li><b>원인</b>: 15:35:59~15:36:02에 사람이 요청한 <code>review --publish</code> 명령이
+        같은 모의 앱키로 별도 <code>authenticate()</code> 호출 &rarr; 새 토큰 발급되며 실행 중이던
+        run 프로세스의 기존 토큰이 무효화됨. <code>process_lock.py</code>가 막던 "run 프로세스
+        중복 기동" 사고와 동일 메커니즘이지만, review 명령은 그 락을 거치지 않아 뚫림.
+        <code>_request_page</code>의 자동 재인증은 HTTP 401에만 걸리는데, 이번 에러는
+        바디 <code>return_code</code> 레벨이라 자동회복 안 됨.</li>
+      <li><b>조치</b>: run 프로세스(PID 19848) 재시작 &rarr; 새 토큰으로 15:39 정상 재기동,
+        이후 청산체크 재개.</li>
+      <li><b>재발방지 여지</b>: review 명령도 acquire_run_lock류 보호(또는 run 프로세스가
+        살아있으면 그쪽에 인증을 위임/스킵)가 없으면 같은 사고 재발 가능. 별도 개선과제로 제안.</li>
+    </ul>
+  </div>
   <h2 class="section">전체 체결 내역</h2>
   <table class="trades">
     <thead><tr><th>진입(KST)</th><th>종목</th><th>체제</th><th>진입가</th><th>청산가</th><th>수익률</th><th>청산(KST)</th></tr></thead>
