@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>10-26 ~ 10-30 주간 신호 분석</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+  .summary {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .stat { min-width: 120px; }
+  .stat .label { font-size: 12px; color: var(--text-muted); }
+  .stat .value { font-size: 20px; font-weight: 600; }
+  .analysis {
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .good { color: #006300; font-weight: 600; }
+  .bad { color: #b3261e; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .small { font-size: 12px; }
+  table.trades {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden;
+  }
+  table.trades th, table.trades td {
+    text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    font-variant-numeric: tabular-nums;
+  }
+  table.trades th:nth-child(1), table.trades td:nth-child(1),
+  table.trades th:nth-child(2), table.trades td:nth-child(2),
+  table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
+  table.trades th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  .code { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .tag-carry { background: #fdeeda; color: #93540a; }
+  h2.section { font-size: 16px; margin: 28px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .card-head h3 { font-size: 15px; margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .sigbox { background: var(--page); border: 1px solid var(--grid); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .sigbox ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .sig-yes { color: #006300; font-weight: 600; font-size: 12px; }
+  .sig-no { color: var(--text-muted); font-size: 12px; }
+  .sig-na { color: var(--text-muted); font-style: italic; font-size: 12px; }
+  table.mas { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mas td { padding: 3px 4px; border-bottom: 1px solid var(--grid); }
+  table.mas td:first-child { color: var(--text-muted); }
+  table.mas td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden; }
+  table.ledger th, table.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  table.ledger th:nth-child(-n+2), table.ledger td:nth-child(-n+2),
+  table.ledger th:nth-child(6), table.ledger td:nth-child(6) { text-align: left; }
+  table.ledger tr.group td { text-align: left; background: var(--page); padding-top: 12px; }
+  .side-buy { color: #1a5fb4; font-weight: 600; }
+  .side-sell { color: #b3261e; font-weight: 600; }
+  .note { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  .proposal { background: var(--surface-1); border: 1px solid var(--grid); border-left: 4px solid #1a5fb4;
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 12px; font-size: 14px; }
+  .proposal h3 { margin: 0 0 6px; font-size: 16px; }
+  .howto { background: var(--page); border: 1px dashed var(--grid); border-radius: 8px; padding: 10px 14px;
+    font-size: 13px; margin: 8px 0 16px; }
+  .warn { color: #93540a; font-weight: 600; }
+  table.stats { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface-1);
+    border: 1px solid var(--grid); margin-bottom: 14px; }
+  table.stats th, table.stats td { padding: 6px 9px; border-bottom: 1px solid var(--grid); text-align: right;
+    font-variant-numeric: tabular-nums; }
+  table.stats th:first-child, table.stats td:first-child { text-align: left; }
+  table.stats th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  h3.sub { font-size: 14px; margin: 16px 0 6px; color: var(--text-secondary); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 500;
+    margin-left: 6px; vertical-align: middle; }
+  .badge.ok { background: #e6f4ea; color: #137333; }
+  .badge.conflict { background: #fef7e0; color: #b06000; }
+  .badge.neutral { background: #eceff1; color: #455a64; }
+  .conflict-note { background: #fef7e0; color: #93540a; padding: 6px 10px; border-radius: 6px; font-size: 13px;
+    margin: 6px 0; }
+  table.compare { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0;
+    font-variant-numeric: tabular-nums; }
+  table.compare th, table.compare td { padding: 4px 8px; border-bottom: 1px solid var(--grid); text-align: right; }
+  table.compare th:first-child, table.compare td:first-child { text-align: left; }
+  table.compare th { color: var(--text-muted); font-weight: 500; }
+  .up { color: #137333; font-weight: 600; }
+  .down { color: #c5221f; font-weight: 600; }
+  .small { font-size: 12px; font-weight: 400; }
+</style></head>
+<body><div class="wrap">
+  <h1>10-26 ~ 10-30 주간 신호 분석</h1>
+  <div class="subtitle">모의투자 · 신호 분석 09-07부터 · 실제 매매 09-28부터 · 현재 설정: 마감 12:00 · 손익비 2.0 · 시장필터 없음 · 자동생성</div>
+  <div class="summary">
+    <div class="stat"><div class="label">실제매매 이번 주 net</div><div class="value">-777,933</div></div>
+    <div class="stat"><div class="label">실제매매 누적 net</div><div class="value">-8,865,815</div></div>
+    <div class="stat"><div class="label">돌파신호 이번 주 / 누적</div><div class="value">25 / 137</div></div>
+    <div class="stat"><div class="label">미청산</div><div class="value">1</div></div>
+    <div class="stat"><div class="label">누적 표본 (제안 최소 30건·15일)</div><div class="value">137건 / 30일</div></div>
+  </div>
+
+  <h2 class="section">제안</h2>
+  <div class='proposal'><h3>P-20261030-1 진입마감 10:00<span class='badge ok'>수익액 ↑ · 승률 ↑</span></h3><div>바꿀 것: <code>SCORE_ENTRY_CUTOFF_TIME</code> 12:00 → <b>10:00</b></div><table class='compare'><thead><tr><th>같은 기간에 이 설정이었다면</th><th>현재</th><th>후보</th><th>차이</th></tr></thead><tbody><tr><td>총손익</td><td>-564만원</td><td>-157만원</td><td class='up'><b>+406만원</b><br><span class='small'>(1건 투자금 대비 +34.5%)</span></td></tr><tr><td>승률</td><td>36%</td><td>40%</td><td class='up'><b>+4.6%p</b></td></tr><tr><td>거래 수</td><td>137건</td><td>55건</td><td>-82건</td></tr></tbody></table><div class='muted'>거래당 평균: +0.06%p (거래 1건당 손익 변화)</div><div class='muted'>후보 설정도 총손익은 손실(-157만원)</div><div class='muted'>4개 조건 통과: 수익액 4/4 · 승률 4/4</div><div>신뢰도: 수익액 높음 (개선 확률 99%, 90% 범위 +0.11 ~ +0.36%p) · 승률 보통 (개선 확률 89%, 90% 범위 -1.97 ~ +10.91%p)</div><div class='muted'>2026-10-26에 거절됨 (P-20261023-1, 사유: 검증팀 거절(2026-10-26): 무작위로 63건 줄인 것과 구별 안 됨(p=0.28), 고정 익절·손절 가정 의존(장마감 보유 시 기준 미달), 10-16 &#x27;11시대 유지&#x27; 결정과 충돌. 재검토 조건: 09:20 이전 신호 제외 기준 무작위 대비 p&lt;0.1 유지, 엔진식 청산에서도 개선, 특정일 제외·지수 상승일에도 같은 방향, 10시 전 실거래 30건+)</div></div><div class='proposal'><h3>P-20261030-2 시장필터 일봉5일선<span class='badge ok'>수익액 ↑ · 승률 ↑</span></h3><div>바꿀 것: <code>MARKET_FILTER</code> 없음 → <b>일봉5일선</b></div><table class='compare'><thead><tr><th>같은 기간에 이 설정이었다면</th><th>현재</th><th>후보</th><th>차이</th></tr></thead><tbody><tr><td>총손익</td><td>-564만원</td><td>-256만원</td><td class='up'><b>+279만원</b><br><span class='small'>(1건 투자금 대비 +23.7%)</span></td></tr><tr><td>승률</td><td>36%</td><td>35%</td><td class='up'><b>+0.6%p</b></td></tr><tr><td>거래 수</td><td>137건</td><td>61건</td><td>-76건</td></tr></tbody></table><div class='muted'>거래당 평균: -0.03%p (거래 1건당 손익 변화)</div><div class='muted'>후보 설정도 총손익은 손실(-256만원)</div><div class='conflict-note'>⚠ 수익액 증가는 거래 수가 줄어 손실이 준 효과 - 남은 거래 1건당 손익은 나빠짐(또는 같음)</div><div class='muted'>4개 조건 통과: 수익액 4/4 · 승률 1/4</div><div>신뢰도: 수익액 높음 (개선 확률 97%, 90% 범위 +0.03 ~ +0.34%p) · 승률 낮음 (개선 확률 54%, 90% 범위 -7.69 ~ +9.54%p)</div><div class='warn'>시장 필터는 엔진에 아직 없는 기능이라, 반영하려면 엔진이 진입 시점에 지수를 조회하는 기능을 새로 만들어야 함(별도 설계 필요).</div></div><div class='proposal'><h3>P-20261030-3 시장필터 일봉20일선<span class='badge ok'>수익액 ↑ · 승률 ↑</span></h3><div>바꿀 것: <code>MARKET_FILTER</code> 없음 → <b>일봉20일선</b></div><table class='compare'><thead><tr><th>같은 기간에 이 설정이었다면</th><th>현재</th><th>후보</th><th>차이</th></tr></thead><tbody><tr><td>총손익</td><td>-564만원</td><td>-142만원</td><td class='up'><b>+404만원</b><br><span class='small'>(1건 투자금 대비 +34.4%)</span></td></tr><tr><td>승률</td><td>36%</td><td>44%</td><td class='up'><b>+5.2%p</b></td></tr><tr><td>거래 수</td><td>137건</td><td>55건</td><td>-82건</td></tr></tbody></table><div class='muted'>거래당 평균: +0.11%p (거래 1건당 손익 변화)</div><div class='muted'>후보 설정도 총손익은 손실(-142만원)</div><div class='muted'>4개 조건 통과: 수익액 4/4 · 승률 3/4</div><div>신뢰도: 수익액 높음 (개선 확률 99%, 90% 범위 +0.09 ~ +0.41%p) · 승률 낮음 (개선 확률 79%, 90% 범위 -4.90 ~ +14.34%p)</div><div class='warn'>시장 필터는 엔진에 아직 없는 기능이라, 반영하려면 엔진이 진입 시점에 지수를 조회하는 기능을 새로 만들어야 함(별도 설계 필요).</div></div><div class='proposal'><h3>P-20261030-4 시장필터 갭상승<span class='badge conflict'>⚠ 수익액 ↑ · 승률 ↓</span></h3><div>바꿀 것: <code>MARKET_FILTER</code> 없음 → <b>갭상승</b></div><table class='compare'><thead><tr><th>같은 기간에 이 설정이었다면</th><th>현재</th><th>후보</th><th>차이</th></tr></thead><tbody><tr><td>총손익</td><td>-564만원</td><td>-343만원</td><td class='up'><b>+190만원</b><br><span class='small'>(1건 투자금 대비 +16.1%)</span></td></tr><tr><td>승률</td><td>36%</td><td>30%</td><td class='down'><b>-4.3%p</b></td></tr><tr><td>거래 수</td><td>137건</td><td>73건</td><td>-64건</td></tr></tbody></table><div class='muted'>거래당 평균: -0.07%p (거래 1건당 손익 변화)</div><div class='muted'>후보 설정도 총손익은 손실(-343만원)</div><div class='conflict-note'>⚠ 수익액은 늘지만 승률이 떨어짐 - 거래가 줄어 손실 합이 줄었을 뿐, 남은 거래의 평균·승률은 더 나쁨</div><div class='conflict-note'>⚠ 수익액 증가는 거래 수가 줄어 손실이 준 효과 - 남은 거래 1건당 손익은 나빠짐(또는 같음)</div><div class='muted'>4개 조건 통과: 수익액 4/4 · 승률 1/4</div><div>신뢰도: 수익액 보통 (개선 확률 87%, 90% 범위 -0.04 ~ +0.28%p) · 승률 낮음 (개선 확률 17%, 90% 범위 -12.15 ~ +2.92%p)</div><div class='warn'>시장 필터는 엔진에 아직 없는 기능이라, 반영하려면 엔진이 진입 시점에 지수를 조회하는 기능을 새로 만들어야 함(별도 설계 필요).</div></div><div class='howto'>Claude Code에서 이렇게 말하면 됨:<br>· <b>"P-20261030-1 반영해"</b> — 테스트부터 쓰고 고친 뒤 커밋<br>· <b>"P-20261030-1 거절, 사유는 ..."</b> — 거절 이력으로 남음<br>· <b>"마감을 11:30으로 하면?"</b> 처럼 다른 값 — 그 값으로 같은 4개 조건을 즉석 검증해서 비교해줌</div><h3 class='sub'>대기 중인 이전 제안</h3><ul><li>P-20261023-2 시장필터 일봉5일선 (10-23)</li><li>P-20261023-3 시장필터 일봉20일선 (10-23)</li><li>P-20261023-4 시장필터 갭상승 (10-23)</li></ul>
+  <h3 class="sub">후보별 4개 조건 (표본 30건·15일 / 개선 중앙값 수익액 +0.10%p/건, 승률 +3%p / 20개 중 14개 / 앞뒤 기간 모두 · 두 트랙 중 하나라도 4개 모두 통과하면 제안)</h3>
+  <p class='muted'>수익액 = 같은 기간에 그 설정이었다면 생겼을 총손익(1건 평균 투자금 기준 원 환산). 승률 = 이익으로 끝난 시뮬레이션 거래 비율. 둘 다 20개 청산 조합의 중앙값. 신뢰도는 표시 전용. 차이는 20개 조합별 차이의 중앙값이라 현재·후보 칸을 뺀 값과 조금 다를 수 있음. 거래당 평균 = 거래 1건당 손익 변화. 수익액이 늘어도 거래당 평균이 나빠졌다면 거래를 덜 해서 손실이 준 것.<br>신뢰도 = 신호 있는 날을 다시 뽑아(2,000회) 트랙별 개선폭이 0보다 컸던 비율. 이익이 늘 확률이 아니며 판정에는 안 씀. 표본 미달 후보는 등급 없이 참고로만 표시.<br>원 환산 기준: 실제 당일매매 1건 평균 투자금 1,177만원 (09-28 이후)</p>
+  <table class='stats'><thead><tr><th>후보</th><th>수익액 차이</th><th>승률 차이</th><th>거래 수 차이</th><th>수익액 트랙</th><th>승률 트랙</th><th>엇갈림</th><th style='text-align:left'>조건별</th></tr></thead><tbody><tr><td>진입마감 10:00</td><td class='up'>+406만원</td><td class='up'>+4.6%p</td><td>-82건</td><td>4/4 · 높음 (개선 확률 99%)</td><td>4/4 · 보통 (개선 확률 89%)</td><td>-</td><td style='text-align:left'>수익액 [표본 55/30건·30/15일 ✔ · 개선폭 +0.25%p ✔ · 견고성 20/20 ✔ · 기간안정성 앞 +0.20%p / 뒤 +0.29%p ✔]<br>승률 [표본 55/30건·30/15일 ✔ · 개선폭 +4.6%p ✔ · 견고성 20/20 ✔ · 기간안정성 앞 +6.8%p / 뒤 +1.9%p ✔]</td></tr><tr><td>진입마감 11:00</td><td class='up'>+132만원</td><td class='up'>+0.5%p</td><td>-29건</td><td>2/4 · 높음 (개선 확률 95%)</td><td>2/4 · 낮음 (개선 확률 60%)</td><td>-</td><td style='text-align:left'>수익액 [표본 108/30건·30/15일 ✔ · 개선폭 +0.08%p ✘ · 견고성 20/20 ✔ · 기간안정성 앞 -0.03%p / 뒤 +0.22%p ✘]<br>승률 [표본 108/30건·30/15일 ✔ · 개선폭 +0.5%p ✘ · 견고성 14/20 ✔ · 기간안정성 앞 -2.8%p / 뒤 +4.6%p ✘]</td></tr><tr><td>진입마감 13:00</td><td class='down'>-94만원</td><td class='up'>+0.1%p</td><td>+29건</td><td>1/4 · 낮음 (개선 확률 0%)</td><td>1/4 · 낮음 (개선 확률 54%)</td><td>⚠ 수익액 ↓ · 승률 ↑</td><td style='text-align:left'>수익액 [표본 166/30건·30/15일 ✔ · 개선폭 -0.06%p ✘ · 견고성 0/20 ✘ · 기간안정성 앞 -0.06%p / 뒤 -0.04%p ✘]<br>승률 [표본 166/30건·30/15일 ✔ · 개선폭 +0.1%p ✘ · 견고성 10/20 ✘ · 기간안정성 앞 -0.4%p / 뒤 +1.2%p ✘]</td></tr><tr><td>진입마감 14:00</td><td class='down'>-240만원</td><td class='up'>+0.3%p</td><td>+82건</td><td>1/4 · 낮음 (개선 확률 0%)</td><td>1/4 · 낮음 (개선 확률 55%)</td><td>⚠ 수익액 ↓ · 승률 ↑</td><td style='text-align:left'>수익액 [표본 219/30건·30/15일 ✔ · 개선폭 -0.15%p ✘ · 견고성 0/20 ✘ · 기간안정성 앞 -0.16%p / 뒤 -0.11%p ✘]<br>승률 [표본 219/30건·30/15일 ✔ · 개선폭 +0.3%p ✘ · 견고성 11/20 ✘ · 기간안정성 앞 -0.6%p / 뒤 +1.5%p ✘]</td></tr><tr><td>손익비 게이트 끄기</td><td class='down'>-246만원</td><td class='up'>+1.0%p</td><td>+88건</td><td>1/4 · 낮음 (개선 확률 2%)</td><td>2/4 · 낮음 (개선 확률 62%)</td><td>⚠ 수익액 ↓ · 승률 ↑</td><td style='text-align:left'>수익액 [표본 225/30건·30/15일 ✔ · 개선폭 -0.15%p ✘ · 견고성 0/20 ✘ · 기간안정성 앞 -0.29%p / 뒤 +0.02%p ✘]<br>승률 [표본 225/30건·30/15일 ✔ · 개선폭 +1.0%p ✘ · 견고성 15/20 ✔ · 기간안정성 앞 -2.4%p / 뒤 +6.2%p ✘]</td></tr><tr><td>손익비 1.5</td><td class='down'>-23만원</td><td class='down'>-0.1%p</td><td>+4건</td><td>1/4 · 낮음 (개선 확률 15%)</td><td>1/4 · 낮음 (개선 확률 31%)</td><td>-</td><td style='text-align:left'>수익액 [표본 141/30건·30/15일 ✔ · 개선폭 -0.01%p ✘ · 견고성 3/20 ✘ · 기간안정성 앞 -0.02%p / 뒤 +0.00%p ✘]<br>승률 [표본 141/30건·30/15일 ✔ · 개선폭 -0.1%p ✘ · 견고성 9/20 ✘ · 기간안정성 앞 -0.3%p / 뒤 +0.0%p ✘]</td></tr><tr><td>손익비 2.5</td><td class='up'>+26만원</td><td class='down'>-0.5%p</td><td>-12건</td><td>3/4 · 낮음 (개선 확률 76%)</td><td>1/4 · 낮음 (개선 확률 32%)</td><td>⚠ 수익액 ↑ · 승률 ↓</td><td style='text-align:left'>수익액 [표본 125/30건·30/15일 ✔ · 개선폭 +0.02%p ✘ · 견고성 16/20 ✔ · 기간안정성 앞 +0.01%p / 뒤 +0.03%p ✔]<br>승률 [표본 125/30건·30/15일 ✔ · 개선폭 -0.5%p ✘ · 견고성 4/20 ✘ · 기간안정성 앞 -1.0%p / 뒤 -0.4%p ✘]</td></tr><tr><td>시장필터 일봉5일선</td><td class='up'>+279만원</td><td class='up'>+0.6%p</td><td>-76건</td><td>4/4 · 높음 (개선 확률 97%)</td><td>1/4 · 낮음 (개선 확률 54%)</td><td>-</td><td style='text-align:left'>수익액 [표본 61/30건·30/15일 ✔ · 개선폭 +0.17%p ✔ · 견고성 20/20 ✔ · 기간안정성 앞 +0.20%p / 뒤 +0.14%p ✔]<br>승률 [표본 61/30건·30/15일 ✔ · 개선폭 +0.6%p ✘ · 견고성 13/20 ✘ · 기간안정성 앞 +6.7%p / 뒤 -6.7%p ✘]</td></tr><tr><td>시장필터 일봉20일선</td><td class='up'>+404만원</td><td class='up'>+5.2%p</td><td>-82건</td><td>4/4 · 높음 (개선 확률 99%)</td><td>3/4 · 낮음 (개선 확률 79%)</td><td>-</td><td style='text-align:left'>수익액 [표본 55/30건·30/15일 ✔ · 개선폭 +0.25%p ✔ · 견고성 20/20 ✔ · 기간안정성 앞 +0.15%p / 뒤 +0.39%p ✔]<br>승률 [표본 55/30건·30/15일 ✔ · 개선폭 +5.2%p ✔ · 견고성 17/20 ✔ · 기간안정성 앞 +4.9%p / 뒤 -16.7%p ✘]</td></tr><tr><td>시장필터 갭상승</td><td class='up'>+190만원</td><td class='down'>-4.3%p</td><td>-64건</td><td>4/4 · 보통 (개선 확률 87%)</td><td>1/4 · 낮음 (개선 확률 17%)</td><td>⚠ 수익액 ↑ · 승률 ↓</td><td style='text-align:left'>수익액 [표본 73/30건·30/15일 ✔ · 개선폭 +0.12%p ✔ · 견고성 20/20 ✔ · 기간안정성 앞 +0.08%p / 뒤 +0.20%p ✔]<br>승률 [표본 73/30건·30/15일 ✔ · 개선폭 -4.3%p ✘ · 견고성 0/20 ✘ · 기간안정성 앞 -5.8%p / 뒤 -2.3%p ✘]</td></tr><tr><td>시장필터 장중시가위</td><td class='up'>+150만원</td><td class='up'>+1.3%p</td><td>-35건</td><td>3/4 · 높음 (개선 확률 97%)</td><td>2/4 · 낮음 (개선 확률 70%)</td><td>-</td><td style='text-align:left'>수익액 [표본 98/30건·30/15일 ✔ · 개선폭 +0.10%p ✘ · 견고성 20/20 ✔ · 기간안정성 앞 +0.05%p / 뒤 +0.19%p ✔]<br>승률 [표본 98/30건·30/15일 ✔ · 개선폭 +1.3%p ✘ · 견고성 15/20 ✔ · 기간안정성 앞 -0.6%p / 뒤 +4.2%p ✘]<br>지수 데이터 없어 제외 4건</td></tr></tbody></table>
+
+  <h2 class="section">실제 매매 성과</h2>
+  <table class='stats'><thead><tr><th>구간</th><th>청산</th><th>승률</th><th>평균익</th><th>평균손</th><th>gross</th><th>net(비용 반영)</th><th>미청산</th></tr></thead><tbody><tr><td>누적 · 데이트레이딩</td><td>44</td><td>20%</td><td>+0.85%</td><td>-0.62%</td><td>-1,639,080</td><td>-2,568,216</td><td>0</td></tr><tr><td>누적 · 스윙</td><td>11 <span class='warn'>표본 부족</span></td><td>9%</td><td>+0.44%</td><td>-5.21%</td><td>-6,074,500</td><td>-6,297,599</td><td>1</td></tr><tr><td>이번 주 · 데이트레이딩</td><td>9 <span class='warn'>표본 부족</span></td><td>0%</td><td>-</td><td>-0.56%</td><td>-588,500</td><td>-777,933</td><td>0</td></tr><tr><td>이번 주 · 스윙</td><td>0 <span class='warn'>표본 부족</span></td><td>-</td><td>-</td><td>-</td><td>+0</td><td>+0</td><td>0</td></tr></tbody></table><h3 class='sub'>청산 사유 (마지막 매도 기준)</h3><ul><li>누적 · 데이트레이딩: 5분봉 20기간선 추세이탈 25건, 손절선 이탈 18건, 장마감(15:20) 강제청산 1건</li><li>누적 · 스윙: 스윙 지지선 이탈 11건</li><li>이번 주 · 데이트레이딩: 5분봉 20기간선 추세이탈 5건, 손절선 이탈 4건</li></ul>
+
+  <h2 class="section">돌파 신호의 질 (현재 설정 기준)</h2>
+  <table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>누적</td><td>137</td><td>+1.38%</td><td>-1.66%</td><td>-0.06%</td><td>-0.06%</td><td>-0.32%</td><td>47%</td></tr><tr><td>이번 주</td><td>25 <span class='warn'>표본 부족</span></td><td>+1.13%</td><td>-1.42%</td><td>-0.08%</td><td>-0.14%</td><td>-0.56%</td><td>40%</td></tr></tbody></table>
+  <h3 class='sub'>신호 시각대 (관측 전용 포함 14:00 마감 기준)</h3><table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>9시</td><td>55</td><td>+1.47%</td><td>-2.06%</td><td>-0.18%</td><td>-0.24%</td><td>-0.69%</td><td>55%</td></tr><tr><td>10시</td><td>53</td><td>+1.26%</td><td>-1.38%</td><td>-0.06%</td><td>-0.04%</td><td>-0.13%</td><td>42%</td></tr><tr><td>11시</td><td>29 <span class='warn'>표본 부족</span></td><td>+1.42%</td><td>-1.40%</td><td>+0.15%</td><td>+0.26%</td><td>+0.01%</td><td>41%</td></tr><tr><td>12시</td><td>29 <span class='warn'>표본 부족</span></td><td>+0.85%</td><td>-1.16%</td><td>-0.10%</td><td>+0.07%</td><td>-0.30%</td><td>31%</td></tr><tr><td>13시</td><td>53</td><td>+0.78%</td><td>-0.91%</td><td>+0.01%</td><td>-0.11%</td><td>-0.18%</td><td>23%</td></tr></tbody></table><h3 class='sub'>시장 필터</h3><table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>일봉5일선 통과</td><td>61</td><td>+1.22%</td><td>-1.77%</td><td>-0.18%</td><td>-0.14%</td><td>-0.70%</td><td>46%</td></tr><tr><td>일봉5일선 미통과</td><td>76</td><td>+1.51%</td><td>-1.57%</td><td>+0.03%</td><td>+0.01%</td><td>-0.02%</td><td>47%</td></tr><tr><td>일봉20일선 통과</td><td>55</td><td>+1.33%</td><td>-1.74%</td><td>-0.20%</td><td>-0.10%</td><td>-0.35%</td><td>51%</td></tr><tr><td>일봉20일선 미통과</td><td>82</td><td>+1.41%</td><td>-1.61%</td><td>+0.03%</td><td>-0.03%</td><td>-0.30%</td><td>44%</td></tr><tr><td>갭상승 통과</td><td>73</td><td>+1.16%</td><td>-1.72%</td><td>-0.13%</td><td>-0.20%</td><td>-0.72%</td><td>41%</td></tr><tr><td>갭상승 미통과</td><td>64</td><td>+1.63%</td><td>-1.60%</td><td>+0.01%</td><td>+0.11%</td><td>+0.13%</td><td>53%</td></tr><tr><td>장중시가위 통과</td><td>89</td><td>+1.35%</td><td>-1.63%</td><td>-0.03%</td><td>-0.01%</td><td>-0.29%</td><td>52%</td></tr><tr><td>장중시가위 미통과</td><td>42</td><td>+1.32%</td><td>-1.42%</td><td>+0.02%</td><td>+0.03%</td><td>-0.27%</td><td>36%</td></tr></tbody></table><h3 class='sub'>손익비 (게이트를 끄고 본 신호 기준)</h3><table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>통과</td><td>111</td><td>+1.40%</td><td>-1.68%</td><td>-0.11%</td><td>-0.10%</td><td>-0.34%</td><td>43%</td></tr><tr><td>미달</td><td>114</td><td>+1.62%</td><td>-1.68%</td><td>-0.08%</td><td>-0.07%</td><td>-0.21%</td><td>59%</td></tr></tbody></table><h3 class='sub'>점수</h3><table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>상위 1/3</td><td>45</td><td>+1.52%</td><td>-1.41%</td><td>+0.08%</td><td>+0.19%</td><td>-0.16%</td><td>56%</td></tr><tr><td>하위 1/3</td><td>45</td><td>+1.31%</td><td>-1.62%</td><td>-0.09%</td><td>-0.13%</td><td>-0.21%</td><td>51%</td></tr></tbody></table><h3 class='sub'>신고가 여부</h3><table class='stats'><thead><tr><th>구분</th><th>신호</th><th>최대상승</th><th>최대하락</th><th>+30분</th><th>+60분</th><th>장마감(15:20)</th><th>+1% 도달</th></tr></thead><tbody><tr><td>당일 신고가에서 신호</td><td>23 <span class='warn'>표본 부족</span></td><td>+1.55%</td><td>-2.37%</td><td>-0.47%</td><td>-0.62%</td><td>-0.51%</td><td>57%</td></tr><tr><td>당일 고점 아래에서 신호</td><td>114</td><td>+1.35%</td><td>-1.52%</td><td>+0.02%</td><td>+0.06%</td><td>-0.29%</td><td>45%</td></tr></tbody></table>
+
+  <h2 class="section">청산 시뮬레이션 (참고용 · 제안 대상 아님)</h2>
+  <p class="muted">고정 익절/손절 조합별 거래당 net(비용 0.18% 반영). 같은 봉에서 둘 다 닿으면 손절 우선.</p>
+  <table class='stats'><thead><tr><th></th><th>익절 +0.5%</th><th>익절 +1.0%</th><th>익절 +1.5%</th><th>익절 +2.0%</th><th>익절 +3.0%</th></tr></thead><tbody><tr><td>손절 -0.5%</td><td>-0.25%</td><td>-0.25%</td><td>-0.29%</td><td>-0.27%</td><td>-0.27%</td></tr><tr><td>손절 -1.0%</td><td>-0.30%</td><td>-0.32%</td><td>-0.35%</td><td>-0.35%</td><td>-0.33%</td></tr><tr><td>손절 -1.5%</td><td>-0.37%</td><td>-0.36%</td><td>-0.40%</td><td>-0.39%</td><td>-0.33%</td></tr><tr><td>손절 -2.0%</td><td>-0.37%</td><td>-0.40%</td><td>-0.44%</td><td>-0.44%</td><td>-0.40%</td></tr></tbody></table>
+
+  <h2 class="section">장세 · 데이터 상태</h2>
+  <ul>
+    <li>신호 분석 09-07부터 · 실제 매매 09-28부터</li>
+    <li>KODEX200: 누적 -13.99% · 이번 주 +4.42%</li>
+    <li>돌파신호가 있던 날 30일 중 분봉 있는 날 30일 · 분봉 빈 날: 없음</li>
+    <li>분봉이 없거나 경로가 잘려 지표에서 뺀 신호: 0건 (관측 전 정규장 봉 없음·관측 뒤 첫 봉이 10분 넘게 늦음 포함)</li>
+    <li>가격 불일치로 뺀 신호: 0건 (분봉 종가가 관측가와 20% 넘게 달라 수정주가 소급 등으로 보고 뺌)</li>
+  </ul>
+</div></body></html>
