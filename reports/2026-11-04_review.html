@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>2026-11-04 매매 복기 리포트</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+  .summary {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .stat { min-width: 120px; }
+  .stat .label { font-size: 12px; color: var(--text-muted); }
+  .stat .value { font-size: 20px; font-weight: 600; }
+  .analysis {
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .good { color: #006300; font-weight: 600; }
+  .bad { color: #b3261e; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .small { font-size: 12px; }
+  table.trades {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden;
+  }
+  table.trades th, table.trades td {
+    text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    font-variant-numeric: tabular-nums;
+  }
+  table.trades th:nth-child(1), table.trades td:nth-child(1),
+  table.trades th:nth-child(2), table.trades td:nth-child(2),
+  table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
+  table.trades th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  .code { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .tag-carry { background: #fdeeda; color: #93540a; }
+  h2.section { font-size: 16px; margin: 28px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .card-head h3 { font-size: 15px; margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .sigbox { background: var(--page); border: 1px solid var(--grid); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .sigbox ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .sig-yes { color: #006300; font-weight: 600; font-size: 12px; }
+  .sig-no { color: var(--text-muted); font-size: 12px; }
+  .sig-na { color: var(--text-muted); font-style: italic; font-size: 12px; }
+  table.mas { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mas td { padding: 3px 4px; border-bottom: 1px solid var(--grid); }
+  table.mas td:first-child { color: var(--text-muted); }
+  table.mas td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden; }
+  table.ledger th, table.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  table.ledger th:nth-child(-n+2), table.ledger td:nth-child(-n+2),
+  table.ledger th:nth-child(6), table.ledger td:nth-child(6) { text-align: left; }
+  table.ledger tr.group td { text-align: left; background: var(--page); padding-top: 12px; }
+  .side-buy { color: #1a5fb4; font-weight: 600; }
+  .side-sell { color: #b3261e; font-weight: 600; }
+  .note { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2026-11-04 매매 복기 리포트</h1>
+  <div class="subtitle">모의투자 · 시각은 KST 기준 · 자동생성</div>
+  <div class="summary">
+    <div class="stat"><div class="label">체결 완료</div><div class="value">3건</div></div>
+    <div class="stat"><div class="label">승/패</div><div class="value">0승 3패</div></div>
+    <div class="stat"><div class="label">평균 수익률</div><div class="value bad">-2.32%</div></div>
+  </div>
+  <div class='analysis'><h2>분석</h2><ul><li>워치리스트가 20261103 기준으로 1일째 미갱신 상태.</li></ul></div>
+  <h2 class="section">매매 내역 (종목별 매수·매도)</h2>
+  
+  <table class="ledger">
+    <thead><tr><th>구분</th><th>일시(KST)</th><th>수량</th><th>체결가</th><th>금액</th><th>사유</th><th>손익</th></tr></thead>
+    <tbody><tr class='group'><td colspan='7'><b>DB손해보험</b><span class='code'> 005830</span> · SWING <span class='tag tag-carry'>이월포지션</span> · <span class='muted'>11-02 진입 · 전량청산 11-04 14:30</span> · 수익률 <span class='bad'>-3.28</span>%</td></tr><tr><td><span class='side-buy'>매수</span></td><td>11-02 10:31</td><td>66주</td><td>181,200</td><td>11,959,200</td><td>신규진입(지지 트리거)</td><td><span class='muted'>-</span></td></tr><tr><td><span class='side-sell'>매도</span></td><td>11-04 14:30</td><td>66주</td><td>175,250</td><td>11,566,500</td><td>스윙 지지선 이탈(전량매도)</td><td><span class='bad'>-392,700</span> (<span class='bad'>-3.28</span>%)</td></tr><tr class='group'><td colspan='7'><b>주성엔지니어링</b><span class='code'> 036930</span> · A · <span class='muted'>11-04 진입 · 전량청산 11-04 10:10</span> · 수익률 <span class='bad'>-1.66</span>%</td></tr><tr><td><span class='side-buy'>매수</span></td><td>11-04 09:53</td><td>73주</td><td>162,400</td><td>11,855,200</td><td>신규진입</td><td><span class='muted'>-</span></td></tr><tr><td><span class='side-sell'>매도</span></td><td>11-04 10:10</td><td>73주</td><td>159,700</td><td>11,658,100</td><td>5분봉 20기간선 추세이탈(전량매도)(5분봉 20기간선 160,530원)</td><td><span class='bad'>-197,100</span> (<span class='bad'>-1.66</span>%)</td></tr><tr class='group'><td colspan='7'><b>이오테크닉스</b><span class='code'> 039030</span> · A · <span class='muted'>11-04 진입 · 전량청산 11-04 10:15</span> · 수익률 <span class='bad'>-2.01</span>%</td></tr><tr><td><span class='side-buy'>매수</span></td><td>11-04 09:53</td><td>32주</td><td>373,500</td><td>11,952,000</td><td>신규진입</td><td><span class='muted'>-</span></td></tr><tr><td><span class='side-sell'>매도</span></td><td>11-04 10:15</td><td>32주</td><td>366,000</td><td>11,712,000</td><td>손절선 이탈(전량매도)(진입시 돌파기준가 368,500원)</td><td><span class='bad'>-240,000</span> (<span class='bad'>-2.01</span>%)</td></tr><tr class='group'><td colspan='7'><b>SK</b><span class='code'> 034730</span> · SWING · <span class='muted'>11-04 진입 · 보유중 23주</span></td></tr><tr><td><span class='side-buy'>매수</span></td><td>11-04 10:43</td><td>23주</td><td>504,000</td><td>11,592,000</td><td>신규진입(지지 트리거)</td><td><span class='muted'>-</span></td></tr></tbody>
+  </table>
+  <div class="note">손익·수익률은 수수료·거래세 미반영(gross). 왕복 약 0.18%(수수료 편도 0.015% + 매도세 0.15%)를 빼고 볼 것.</div>
+  <h2 class="section">종목별 매수 근거 신호 breakdown</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-head"><h3>주성엔지니어링 <span class="code">036930</span></h3>
+      <span class="muted">매수 09:53 · 매도 10:10</span></div>
+      
+      <table class="trades" style="margin:-2px 0 10px;">
+        <thead><tr><th>구분</th><th>일시</th><th>사유</th><th>단가</th><th>수량</th><th>금액</th></tr></thead>
+        <tbody><tr><td><span class='muted'>매수</span></td><td>11-04 09:53</td><td>신규진입</td><td>162,400</td><td>73</td><td>11,855,200</td></tr><tr><td><span class='bad'>매도</span></td><td>11-04 10:10</td><td>5분봉 20기간선 추세이탈(전량매도)(5분봉 20기간선 160,530원)</td><td>159,700</td><td>73</td><td>11,658,100</td></tr></tbody>
+      </table>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-no'>✘ 전일종가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-yes'>✔ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +6점</li><li class='sig-no'>✘ 섹터 방향<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +5점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>21</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>162,400</td></tr>
+            <tr><td>손절가</td><td>159,500</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>165,700</td></tr>
+            <tr><td>손익비</td><td>1.14배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>이오테크닉스 <span class="code">039030</span></h3>
+      <span class="muted">매수 09:53 · 매도 10:15</span></div>
+      
+      <table class="trades" style="margin:-2px 0 10px;">
+        <thead><tr><th>구분</th><th>일시</th><th>사유</th><th>단가</th><th>수량</th><th>금액</th></tr></thead>
+        <tbody><tr><td><span class='muted'>매수</span></td><td>11-04 09:53</td><td>신규진입</td><td>373,500</td><td>32</td><td>11,952,000</td></tr><tr><td><span class='bad'>매도</span></td><td>11-04 10:15</td><td>손절선 이탈(전량매도)(진입시 돌파기준가 368,500원)</td><td>366,000</td><td>32</td><td>11,712,000</td></tr></tbody>
+      </table>
+      <div class="two-col">
+        <div class="sigbox"><ul><li class='sig-no'>✘ 전일종가 돌파<span class='muted'>(5분봉)</span>: +0점</li><li class='sig-yes'>✔ 시가 돌파<span class='muted'>(5분봉)</span>: +10점</li><li class='sig-no'>✘ 정배열(5/10/20/50/60/100/200일선)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 전고점 돌파(60/120/200일)<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 역사적(250거래일) 신고가 돌파<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 골든크로스(20→60일선)+거래량2배<span class='muted'>(일봉)</span>: +0점</li><li class='sig-no'>✘ 인접 저항대 근접(감점)<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 인접 지지대 근접<span class='muted'>(주봉/월봉)</span>: +0점</li><li class='sig-no'>✘ 섹터 방향<span class='muted'>(실시간(사후재계산 불가))</span>: +0점</li><li class='sig-yes'>✔ 손익비 가산점<span class='muted'>(일봉+주봉/월봉 종합)</span>: +7점</li><li class='sig-no'>✘ 장기이평선(60/100/200일선) 돌파<span class='muted'>(일봉)</span>: +0점</li></ul>
+        <div class="muted" style="margin-top:8px;">합산 점수: <b>17</b> · 체제: <b>A</b></div></div>
+        <div class="rrbox">
+          <table class="mas">
+            <tr><td>진입가</td><td>373,500</td></tr>
+            <tr><td>손절가</td><td>368,500</td></tr>
+            <tr><td>저항가(사후재계산)</td><td>385,200</td></tr>
+            <tr><td>손익비</td><td>2.34배</td></tr>
+          </table>
+        </div>
+      </div>
+    </div></div>
+  
+  <h2 class="section">스윙 포지션 현황 (보유중 3건)</h2>
+  <div class="muted small" style="margin:-4px 0 8px;">손절가는 과거에 어느 후보를 뚫고
+  래칫됐는지 기록이 안 남아 사유 표시 불가(최종 숫자만 보존) · 목표가는 지금 시점
+  재계산이라 괄호 안에 근거(스윙 고점/N일 이평선/라운드피겨) 표시</div>
+  <table class="trades">
+    <thead><tr><th>종목</th><th>진입일</th><th>보유일수</th><th>진입가</th>
+    <th>손절가(현재)</th><th>목표가(다음 후보)</th><th>단계</th><th>잔여수량</th></tr></thead>
+    <tbody><tr><td>팬오션<span class='code'> 028670</span></td><td>2026-11-03</td><td>2일째</td><td>5,590</td><td>5,523</td><td>7,830 (스윙 고점)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>2,146</td></tr><tr><td>삼성화재<span class='code'> 000810</span></td><td>2026-11-03</td><td>2일째</td><td>649,000</td><td>628,627</td><td>705,000 (스윙 고점)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>18</td></tr><tr><td>SK<span class='code'> 034730</span></td><td>2026-11-04</td><td>1일째</td><td>504,000</td><td>495,975</td><td>572,000 (weekly_monthly_cluster)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>23</td></tr></tbody>
+  </table>
+  <div class='muted small' style='margin:8px 0 0;'>섹터 방향 확인 - 장마감 수익률은 첫 관측가 기준 마지막 정규장 5분봉 종가</div><h2 class='section'>섹터 나쁨으로 감점된 돌파 (30건)</h2><table class='trades'><thead><tr><th>종목</th><th>첫 관측</th><th>섹터</th><th>섹터점수</th><th>좋음 비율</th><th>+1% 도달</th><th>장마감 수익률</th><th>매수 여부</th></tr></thead><tbody><tr><td>SK스퀘어 (402340)</td><td>09:50</td><td>지주사</td><td>-5</td><td>0%</td><td>X</td><td><span class='bad'>-4.07%</span></td><td>손익비 미달</td></tr><tr><td>SK이노베이션 (096770)</td><td>09:51</td><td>2차전지</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+3.19%</span></td><td>선택됐지만 미체결</td></tr><tr><td>주성엔지니어링 (036930)</td><td>09:51</td><td>반도체</td><td>-5</td><td>22%</td><td>O</td><td><span class='good'>+2.59%</span></td><td>매수</td></tr><tr><td>이오테크닉스 (039030)</td><td>09:51</td><td>반도체</td><td>-5</td><td>22%</td><td>X</td><td><span class='bad'>-2.41%</span></td><td>매수</td></tr><tr><td>팬오션 (028670)</td><td>09:52</td><td>해운/항공/물류</td><td>-5</td><td>22%</td><td>X</td><td><span class='bad'>-1.91%</span></td><td>손익비 미달</td></tr><tr><td>덕산네오룩스 (213420)</td><td>09:57</td><td>IT부품/디스플레이</td><td>-5</td><td>0%</td><td>X</td><td><span class='bad'>-0.21%</span></td><td>손익비 미달</td></tr><tr><td>우진 (105840)</td><td>09:57</td><td>전력설비/전선/원전</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+1.83%</span></td><td>손익비 미달</td></tr><tr><td>한화에어로스페이스 (012450)</td><td>10:25</td><td>방산</td><td>-5</td><td>0%</td><td>X</td><td><span class='bad'>-1.88%</span></td><td>선택됐지만 미체결</td></tr><tr><td>LG전자 (066570)</td><td>10:25</td><td>IT부품/디스플레이</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+0.76%</span></td><td>선택됐지만 미체결</td></tr><tr><td>S-Oil (010950)</td><td>10:26</td><td>화학/정유</td><td>-5</td><td>0%</td><td>O</td><td><span class='bad'>-0.17%</span></td><td>선택됐지만 미체결</td></tr><tr><td>LG유플러스 (032640)</td><td>10:26</td><td>통신/유틸리티</td><td>-5</td><td>17%</td><td>O</td><td><span class='good'>+3.56%</span></td><td>손익비 미달</td></tr><tr><td>KB금융 (105560)</td><td>10:40</td><td>금융</td><td>-5</td><td>0%</td><td>X</td><td><span class='good'>+0.07%</span></td><td>선택됐지만 미체결</td></tr><tr><td>신한지주 (055550)</td><td>10:40</td><td>금융</td><td>-5</td><td>0%</td><td>X</td><td><span class='good'>+0.58%</span></td><td>선택됐지만 미체결</td></tr><tr><td>기업은행 (024110)</td><td>10:41</td><td>금융</td><td>-5</td><td>0%</td><td>X</td><td><span class='bad'>-0.11%</span></td><td>선택됐지만 미체결</td></tr><tr><td>에코프로 (086520)</td><td>10:56</td><td>2차전지</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+7.40%</span></td><td>손익비 미달</td></tr><tr><td>에코프로비엠 (247540)</td><td>10:57</td><td>2차전지</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+9.21%</span></td><td>선택됐지만 미체결</td></tr><tr><td>현대제철 (004020)</td><td>10:57</td><td>철강/비철금속</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+1.05%</span></td><td>선택됐지만 미체결</td></tr><tr><td>아시아나항공 (020560)</td><td>11:02</td><td>해운/항공/물류</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+0.76%</span></td><td>손익비 미달</td></tr><tr><td>삼성SDI (006400)</td><td>11:05</td><td>2차전지</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+11.13%</span></td><td>선택됐지만 미체결</td></tr><tr><td>KT&amp;G (033780)</td><td>11:57</td><td>음식료</td><td>-5</td><td>0%</td><td>X</td><td><span class='bad'>-0.72%</span></td><td>손익비 미달</td></tr><tr><td>에스엠 (041510)</td><td>12:21</td><td>엔터/미디어</td><td>-5</td><td>17%</td><td>X</td><td><span class='bad'>-7.91%</span></td><td>손익비 미달</td></tr><tr><td>넷마블 (251270)</td><td>12:22</td><td>게임</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+1.49%</span></td><td>손익비 미달</td></tr><tr><td>포스코DX (022100)</td><td>12:57</td><td>인터넷/플랫폼/IT서비스</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+8.42%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>두산밥캣 (241560)</td><td>13:02</td><td>기계/건설장비/로봇</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+1.65%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>JYP Ent. (035900)</td><td>13:42</td><td>엔터/미디어</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+0.60%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>NC (036570)</td><td>13:42</td><td>게임</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+1.38%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>삼성화재 (000810)</td><td>13:45</td><td>금융</td><td>-5</td><td>0%</td><td>O</td><td><span class='good'>+0.46%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>삼성바이오로직스 (207940)</td><td>13:50</td><td>바이오/제약</td><td>-5</td><td>29%</td><td>O</td><td><span class='good'>+2.75%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>삼천당제약 (000250)</td><td>13:52</td><td>바이오/제약</td><td>-5</td><td>29%</td><td>O</td><td><span class='good'>+1.38%</span></td><td>손익비 미달</td></tr><tr><td>현대모비스 (012330)</td><td>13:55</td><td>자동차/부품</td><td>-5</td><td>17%</td><td>O</td><td><span class='good'>+1.00%</span></td><td>관측 전용(12시 이후)</td></tr></tbody></table><h2 class='section'>섹터 좋음 가산점 돌파 (16건)</h2><table class='trades'><thead><tr><th>종목</th><th>첫 관측</th><th>섹터</th><th>섹터점수</th><th>좋음 비율</th><th>+1% 도달</th><th>장마감 수익률</th><th>매수 여부</th></tr></thead><tbody><tr><td>SK스퀘어 (402340)</td><td>09:05</td><td>지주사</td><td>+5</td><td>80%</td><td>O</td><td><span class='bad'>-5.29%</span></td><td>손익비 미달</td></tr><tr><td>삼성SDI (006400)</td><td>09:10</td><td>2차전지</td><td>+5</td><td>78%</td><td>O</td><td><span class='good'>+8.58%</span></td><td>손익비 미달</td></tr><tr><td>진에어 (272450)</td><td>09:37</td><td>해운/항공/물류</td><td>+5</td><td>89%</td><td>X</td><td><span class='good'>+0.70%</span></td><td>손익비 미달</td></tr><tr><td>팬오션 (028670)</td><td>09:37</td><td>해운/항공/물류</td><td>+5</td><td>89%</td><td>X</td><td><span class='bad'>-1.40%</span></td><td>손익비 미달</td></tr><tr><td>LG유플러스 (032640)</td><td>09:37</td><td>통신/유틸리티</td><td>+5</td><td>100%</td><td>O</td><td><span class='good'>+4.26%</span></td><td>손익비 미달</td></tr><tr><td>포스코퓨처엠 (003670)</td><td>13:11</td><td>2차전지</td><td>+5</td><td>67%</td><td>O</td><td><span class='good'>+9.68%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>대주전자재료 (078600)</td><td>13:11</td><td>2차전지</td><td>+5</td><td>67%</td><td>O</td><td><span class='good'>+10.78%</span></td><td>손익비 미달</td></tr><tr><td>에코프로 (086520)</td><td>13:11</td><td>2차전지</td><td>+5</td><td>67%</td><td>O</td><td><span class='good'>+5.34%</span></td><td>손익비 미달</td></tr><tr><td>SK이노베이션 (096770)</td><td>13:15</td><td>2차전지</td><td>+5</td><td>89%</td><td>O</td><td><span class='good'>+3.01%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>엘앤에프 (066970)</td><td>13:16</td><td>2차전지</td><td>+5</td><td>89%</td><td>O</td><td><span class='good'>+8.17%</span></td><td>손익비 미달</td></tr><tr><td>에코프로비엠 (247540)</td><td>13:16</td><td>2차전지</td><td>+5</td><td>89%</td><td>O</td><td><span class='good'>+4.63%</span></td><td>손익비 미달</td></tr><tr><td>엔켐 (348370)</td><td>13:17</td><td>2차전지</td><td>+5</td><td>89%</td><td>O</td><td><span class='good'>+8.11%</span></td><td>관측 전용(12시 이후)</td></tr><tr><td>LG에너지솔루션 (373220)</td><td>13:20</td><td>2차전지</td><td>+5</td><td>100%</td><td>O</td><td><span class='good'>+3.38%</span></td><td>손익비 미달</td></tr><tr><td>한미반도체 (042700)</td><td>13:56</td><td>반도체</td><td>+5</td><td>67%</td><td>O</td><td><span class='good'>+1.15%</span></td><td>손익비 미달</td></tr><tr><td>ISC (095340)</td><td>13:56</td><td>반도체</td><td>+5</td><td>67%</td><td>X</td><td><span class='bad'>-1.34%</span></td><td>손익비 미달</td></tr><tr><td>HPSP (403870)</td><td>13:57</td><td>반도체</td><td>+5</td><td>67%</td><td>X</td><td><span class='bad'>-0.12%</span></td><td>관측 전용(12시 이후)</td></tr></tbody></table>
+</div>
+</body>
+</html>
