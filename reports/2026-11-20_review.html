@@ -1,0 +1,92 @@
+<!doctype html><html lang='ko'><head><meta charset='utf-8'><title>2026-11-20 매매 복기 리포트</title><style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
+  .summary {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+  }
+  .stat { min-width: 120px; }
+  .stat .label { font-size: 12px; color: var(--text-muted); }
+  .stat .value { font-size: 20px; font-weight: 600; }
+  .analysis {
+    background: var(--surface-1); border: 1px solid var(--grid);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .good { color: #006300; font-weight: 600; }
+  .bad { color: #b3261e; font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .small { font-size: 12px; }
+  table.trades {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden;
+  }
+  table.trades th, table.trades td {
+    text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    font-variant-numeric: tabular-nums;
+  }
+  table.trades th:nth-child(1), table.trades td:nth-child(1),
+  table.trades th:nth-child(2), table.trades td:nth-child(2),
+  table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
+  table.trades th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  .code { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .tag-carry { background: #fdeeda; color: #93540a; }
+  h2.section { font-size: 16px; margin: 28px 0 12px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; padding: 14px 16px 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .card-head h3 { font-size: 15px; margin: 0; }
+  .two-col { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+  .sigbox { background: var(--page); border: 1px solid var(--grid); border-radius: 8px; padding: 10px 14px; font-size: 13px; }
+  .sigbox ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .sig-yes { color: #006300; font-weight: 600; font-size: 12px; }
+  .sig-no { color: var(--text-muted); font-size: 12px; }
+  .sig-na { color: var(--text-muted); font-style: italic; font-size: 12px; }
+  table.mas { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mas td { padding: 3px 4px; border-bottom: 1px solid var(--grid); }
+  table.mas td:first-child { color: var(--text-muted); }
+  table.mas td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 13px;
+    background: var(--surface-1); border: 1px solid var(--grid); border-radius: 10px; overflow: hidden; }
+  table.ledger th, table.ledger td { padding: 7px 10px; border-bottom: 1px solid var(--grid);
+    text-align: right; font-variant-numeric: tabular-nums; }
+  table.ledger th { color: var(--text-muted); font-weight: 500; background: var(--page); }
+  table.ledger th:nth-child(-n+2), table.ledger td:nth-child(-n+2),
+  table.ledger th:nth-child(6), table.ledger td:nth-child(6) { text-align: left; }
+  table.ledger tr.group td { text-align: left; background: var(--page); padding-top: 12px; }
+  .side-buy { color: #1a5fb4; font-weight: 600; }
+  .side-sell { color: #b3261e; font-weight: 600; }
+  .note { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+</style></head><body><div class='wrap'><h1>2026-11-20 매매 복기 리포트</h1><p>오늘 매매 없음</p>
+  <h2 class="section">스윙 포지션 현황 (보유중 4건)</h2>
+  <div class="muted small" style="margin:-4px 0 8px;">손절가는 과거에 어느 후보를 뚫고
+  래칫됐는지 기록이 안 남아 사유 표시 불가(최종 숫자만 보존) · 목표가는 지금 시점
+  재계산이라 괄호 안에 근거(스윙 고점/N일 이평선/라운드피겨) 표시</div>
+  <table class="trades">
+    <thead><tr><th>종목</th><th>진입일</th><th>보유일수</th><th>진입가</th>
+    <th>손절가(현재)</th><th>목표가(다음 후보)</th><th>단계</th><th>잔여수량</th></tr></thead>
+    <tbody><tr><td>대한항공<span class='code'> 003490</span></td><td>2026-11-06</td><td>15일째</td><td>29,000</td><td>29,657</td><td>확인 필요(다음 정기체크에서 갱신)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>207</td></tr><tr><td>코스메카코리아<span class='code'> 241710</span></td><td>2026-11-16</td><td>5일째</td><td>93,000</td><td>97,800</td><td>확인 필요(다음 정기체크에서 갱신)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>129</td></tr><tr><td>하나금융지주<span class='code'> 086790</span></td><td>2026-11-17</td><td>4일째</td><td>126,000</td><td>120,396</td><td>확인 필요(다음 정기체크에서 갱신)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>95</td></tr><tr><td>HMM<span class='code'> 011200</span></td><td>2026-11-18</td><td>3일째</td><td>21,650</td><td>22,112</td><td>확인 필요(다음 정기체크에서 갱신)</td><td>후보 탐색중(스윙하이/장기이평선/라운드피겨)</td><td>554</td></tr></tbody>
+  </table>
+  <h2 class='section'>재매수 현황 (오늘 0건 / 하루 한도 3건)</h2><p class='muted'>오늘 해당 없음</p><h3 class='sub'>특수 케이스: 같은 종목 2회 이상 재매수</h3><p class='muted'>해당 없음</p><h3 class='sub'>한도 초과로 기록만 한 신호</h3><div class='muted small'>모든 매수 조건을 통과했지만 하루 한도 때문에 안 산 신호. 수익률은 첫 관측가 기준 마지막 정규장 5분봉 종가</div><p class='muted'>해당 없음</p>
+  <div class='muted small' style='margin:8px 0 0;'>섹터 방향 확인 - 장마감 수익률은 첫 관측가 기준 마지막 정규장 5분봉 종가</div><h2 class='section'>섹터 나쁨으로 감점된 돌파 (19건)</h2><table class='trades'><thead><tr><th>종목</th><th>첫 관측</th><th>섹터</th><th>섹터점수</th><th>좋음 비율</th><th>+1% 도달</th><th>장마감 수익률</th><th>매수 여부</th></tr></thead><tbody><tr><td>레인보우로보틱스 (277810)</td><td>09:20</td><td>기계/건설장비/로봇</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>아모레퍼시픽 (090430)</td><td>09:22</td><td>화장품/미용의료기기</td><td>-5</td><td>11%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>메리츠금융지주 (138040)</td><td>09:22</td><td>금융</td><td>-5</td><td>23%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>KB금융 (105560)</td><td>09:25</td><td>금융</td><td>-5</td><td>23%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>에이피알 (278470)</td><td>09:26</td><td>화장품/미용의료기기</td><td>-5</td><td>22%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>LG전자 (066570)</td><td>09:30</td><td>IT부품/디스플레이</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>LG에너지솔루션 (373220)</td><td>09:36</td><td>2차전지</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>선택됐지만 미체결</td></tr><tr><td>셀트리온 (068270)</td><td>09:37</td><td>바이오/제약</td><td>-5</td><td>14%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>진에어 (272450)</td><td>09:42</td><td>해운/항공/물류</td><td>-5</td><td>22%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>LG유플러스 (032640)</td><td>09:46</td><td>통신/유틸리티</td><td>-5</td><td>17%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>POSCO홀딩스 (005490)</td><td>10:07</td><td>지주사</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>선택됐지만 미체결</td></tr><tr><td>코스맥스 (192820)</td><td>10:07</td><td>화장품/미용의료기기</td><td>-5</td><td>22%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>롯데케미칼 (011170)</td><td>10:12</td><td>화학/정유</td><td>-5</td><td>17%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>한화에어로스페이스 (012450)</td><td>11:06</td><td>방산</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>선택됐지만 미체결</td></tr><tr><td>트리니티항공 (091810)</td><td>11:17</td><td>해운/항공/물류</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>삼성바이오로직스 (207940)</td><td>11:21</td><td>바이오/제약</td><td>-5</td><td>29%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>삼성에스디에스 (018260)</td><td>12:56</td><td>인터넷/플랫폼/IT서비스</td><td>-5</td><td>20%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>와이지엔터테인먼트 (122870)</td><td>13:15</td><td>엔터/미디어</td><td>-5</td><td>17%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>삼양식품 (003230)</td><td>13:22</td><td>음식료</td><td>-5</td><td>0%</td><td>-</td><td><span class='muted'>-</span></td><td>관측 전용(12시 이후)</td></tr></tbody></table><h2 class='section'>섹터 좋음 가산점 돌파 (3건)</h2><table class='trades'><thead><tr><th>종목</th><th>첫 관측</th><th>섹터</th><th>섹터점수</th><th>좋음 비율</th><th>+1% 도달</th><th>장마감 수익률</th><th>매수 여부</th></tr></thead><tbody><tr><td>크래프톤 (259960)</td><td>09:45</td><td>게임</td><td>+5</td><td>67%</td><td>-</td><td><span class='muted'>-</span></td><td>선택됐지만 미체결</td></tr><tr><td>삼성바이오로직스 (207940)</td><td>10:30</td><td>바이오/제약</td><td>+5</td><td>71%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr><tr><td>에스엠 (041510)</td><td>11:20</td><td>엔터/미디어</td><td>+5</td><td>67%</td><td>-</td><td><span class='muted'>-</span></td><td>손익비 미달</td></tr></tbody></table></div></body></html>
